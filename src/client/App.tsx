@@ -69,7 +69,10 @@ export default function App() {
         <p className="thesis__line">
           Ring sees. Bee remembers. Nova reasons. Alexa+ speaks. <em>Fire TV answers.</em>
         </p>
-        <p className="thesis__meta">Replay-first · three threshold scenarios</p>
+        <p className="thesis__meta">
+          <span className="badge badge--sim" style={{ marginRight: "0.5rem" }}>SIMULATED EVENT · FICTIONAL HOUSEHOLD</span>
+          Replay-first · three threshold scenarios
+        </p>
       </div>
 
       <main id="main" className="console" aria-busy={controller.loading}>

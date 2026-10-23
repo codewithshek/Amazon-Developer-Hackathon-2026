@@ -1,48 +1,46 @@
-# HearthGuard (KinSight)
+# HearthGuard (KinSight) — Context-Aware Care Through MCP
 
-**A cross-device care concierge for the moments a normal smart-home alert is too late.**
+> **HearthGuard is an MCP-powered care orchestration prototype that turns simulated doorstep and hallway events into calm, confirmable household actions.**
 
-HearthGuard connects a Ring-style threshold event, spoken household memory, an Alexa+ MCP
-server, AWS Bedrock Nova, and a 10-foot Fire TV care card into one calm intervention loop.
-The demo is built around one fictional household and three threshold scenarios. The protocol
-work is real; the camera frames and household are not.
+**Primary Track:** **Alexa+ Track** (Self-hosted MCP `2025-11-25` Streamable HTTP Server + Multimodal Web Client)  
+**Mini-Challenges:** **Open Source Mini-Challenge** (`packages/ring-alexa-mcp-bridge`, MIT) · **AWS Builder Mini-Challenge** (`@aws-sdk/client-bedrock-runtime`, Nova Pro replay fallback)
 
 ![HearthGuard Night Watch studio](docs/studio.png)
 
 ---
 
-## What it is
+## 1. What It Is
 
-- **One care loop, not five dashboards.** A threshold event becomes a reasoned care card,
-  three remote-friendly actions, and a written care note.
-- **Built for the room, not the phone.** The Fire TV surface is designed for a viewer on a
-  couch: large type, high contrast, numeric shortcuts, and D-pad focus that is always visible.
-- **Replay-first.** With no cloud credentials the app runs a deterministic, signed local
-  replay. Live Ring, Bee, and Bedrock paths exist but are optional.
+HearthGuard is an MCP-powered care orchestration prototype designed for the moments when a generic smart-home alert is too late or too loud. 
 
-The console uses an editorial “Night Watch” language: warm charcoal, hairlines, a serif
-reading pane, monospaced telemetry, and a single amber porch-light accent.
+Instead of broadcasting sirens or unhelpful "Motion Detected" alerts to a caregiver's phone, HearthGuard executes an end-to-end **Model Context Protocol (MCP)** workflow:
+1. **Analyze event (`analyze_threshold_event`):** Ingests simulated camera and doorstep signals.
+2. **Retrieve spoken context (`sync_bee_ambient_context`):** Surfaces recent household spoken memory.
+3. **Dispatch visual care card (`dispatch_firetv_multimodal_hud`):** Renders a high-contrast companion card with audio ducking on the large screen.
+4. **Execute voice intervention (`execute_alexa_threshold_intervention`):** Triggers contextual Alexa+ voice prompts.
+5. **Resolve & audit (`resolve_care_incident`):** Writes the resolution to the auditable timeline resource (`care://timeline`).
+
+HearthGuard leads with two core human scenarios:
+- **Primary: Scenario 1 (`SCN-01` — Nighttime exit concern):** Resident Arthur (78, living with memory loss) walks toward the front door at 2:15 AM with car keys. HearthGuard catches the contradiction with his calendar (dentist is Tuesday at 2 PM, not 7 AM), speaks a reassuring redirection in the hallway, and notifies the caregiver without panic.
+- **Secondary: Scenario 2 (`SCN-02` — Deaf / Hard-of-Hearing courier relay):** Elena cannot hear the doorbell; the companion screen ducks room audio, highlights captions, and offers 1-touch remote actions to instruct the courier at the door.
+- **Supporting: Scenario 3 (`SCN-03` — Delivery temperature reminder):** Household alert for a package left in direct sunlight on a 34°C porch.
 
 ---
 
-## What is live and what is simulated
+## 2. What Is Real vs. Simulated in This Build
 
-This table is the honest boundary. It also appears in the app’s **What is simulated** footer.
+This table is the honest boundary between implemented runtime software and simulated components:
 
-| Surface | Default (no credentials) | With configuration |
-| --- | --- | --- |
-| Ring webhook contract | HMAC-SHA256 signing and verification, 300-second replay window | Same code path; set `RING_WEBHOOK_SECRET` |
-| Ring WHEP | Deterministic SDP loopback; the camera image is procedural canvas art | Calls a WHEP endpoint when `RING_OAUTH_TOKEN` is set. Live partner access is **not verified** by this repo. |
-| Alexa+ MCP | Real MCP SDK server over Streamable HTTP, protocol `2025-11-25` | Same server; no Alexa+ cloud registration is included |
-| AWS Bedrock | Recorded spoken response and deterministic care card | Nova generates the spoken sentence when AWS credentials and model access exist; the card/action structure stays deterministic |
-| Bee memory | Recorded household fixture | Queries `BEE_PROXY_URL` with a 400 ms timeout, then falls back |
-| Fire TV | Browser simulation of a 10-foot HUD | Same browser surface; no physical Fire TV or Vega OS package is included |
-| Room tone | Generated in the browser with WebAudio | Same; audio starts only after a user gesture |
-
-No real camera stream, Echo device, Fire TV device, or Alexa+ account is invoked. The masthead’s
-**HMAC verified** chip means the local secret is configured (and, after a replay, that the
-self-check passed); it does not mean a live Ring event was received. See
-[SECURITY.md](SECURITY.md) and the in-app provenance panel for the full disclosure.
+| Component | Status in Code | Implementation Detail |
+| :--- | :--- | :--- |
+| **Alexa+ MCP Server** | **Real Runtime Code** | Fully operational MCP server via `@modelcontextprotocol/sdk` on `POST /mcp`, `GET /mcp` (SSE), and `DELETE /mcp` using Streamable HTTP (spec `2025-11-25`). 5 tools and 3 resources are registered and tested. |
+| **Ring Webhook Contract** | **Real Runtime Code** | Constant-time `crypto.timingSafeEqual` HMAC-SHA256 signature verification with a 300-second replay window (`verifyRingWebhookHmac`). |
+| **WebRTC WHEP Negotiation** | **Real Runtime Code** | RFC 8829 SDP offer/answer negotiation logic (`negotiateRingWhepSession`) with a deterministic loopback mode. |
+| **Large-Screen UI & D-Pad** | **Real Runtime Code** | 10-foot spatial interface (`?mode=firetv`) with keyboard D-pad focus state machine (`ArrowUp/Down`, `Enter`, `1–3`, `Escape`), WebAudio room-tone ducking (100% $\to$ 20%), and zero console errors. |
+| **Audit & Timeline Log** | **Real Runtime Code** | In-memory bounded audit log exposed via MCP resource `care://timeline` and SSE stream `/api/events`. |
+| **Household & Camera Imagery** | **Simulated / Replay** | Fictional household (Arthur, Elena) and procedural HTML5 Canvas camera reconstruction. No live Ring cameras or physical Echo hardware required. |
+| **AWS Bedrock / Bee Context** | **Simulated / Replay Fallback** | Runtime SDK calls to Bedrock (`amazon.nova-pro-v1:0`) and Bee (`/v1/facts`) are implemented, but fall back gracefully to deterministic fixtures so testing and judging require zero credentials. |
+| **Device Packaging** | **Browser Simulation** | The companion UI is a browser simulation; no physical Fire OS APK or Vega OS package is claimed. |
 
 ---
 

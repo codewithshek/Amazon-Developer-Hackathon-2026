@@ -65,6 +65,9 @@ export function CompactHud({
           <span className="live__dot" aria-hidden="true" />
           Care card
         </span>
+        <span className="badge badge--sim" style={{ fontSize: "0.72rem", padding: "2px 7px" }}>
+          SIMULATED EVENT
+        </span>
         <button
           type="button"
           className="hud__close"
@@ -136,15 +139,25 @@ export function FullHud({
   // focus if the viewer has not already moved to a control outside the card.
   useEffect(() => {
     if (!focusIndex) return;
-    const timer = window.setTimeout(() => {
+    const focusFirst = () => {
       const active = document.activeElement;
       const outside =
         active instanceof HTMLElement &&
         active !== document.body &&
         !active.closest(".hud--full");
-      if (!outside) focusIndex(0);
-    }, 320);
-    return () => window.clearTimeout(timer);
+      if (!outside && !active?.closest("[data-tv-action]")) {
+        focusIndex(0);
+      }
+    };
+
+    const timers = [
+      window.setTimeout(focusFirst, 50),
+      window.setTimeout(focusFirst, 250),
+      window.setTimeout(focusFirst, 450),
+      window.setTimeout(focusFirst, 750),
+      window.setTimeout(focusFirst, 1100)
+    ];
+    return () => timers.forEach((t) => window.clearTimeout(t));
   }, [focusIndex, incident.id]);
 
   return (
@@ -153,6 +166,9 @@ export function FullHud({
         <span className="hud__tag">
           <span className="live__dot" aria-hidden="true" />
           Live · Alexa+ care card
+        </span>
+        <span className="badge badge--sim" style={{ marginLeft: "auto", marginRight: "0.8rem", fontSize: "0.75rem", padding: "2px 8px" }}>
+          SIMULATED EVENT
         </span>
         <button type="button" className="hud__close" onClick={onResolve} aria-label="Close the care card">
           <Glyph name="back" size={15} />

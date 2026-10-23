@@ -47,6 +47,9 @@ export function Masthead({
       </a>
 
       <div className="masthead__status" aria-label="System status">
+        <span className="chip chip--warn" style={{ fontWeight: 600, letterSpacing: "0.04em" }}>
+          SIMULATED EVENT · FICTIONAL HOUSEHOLD
+        </span>
         <span className={`live ${connected ? "is-live" : "is-polling"}`}>
           <span className="live__dot" aria-hidden="true" />
           {connected ? "Live" : "Polling"}

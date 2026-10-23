@@ -26,7 +26,7 @@ export function ThresholdPane({ incident, scenario, loading }: ThresholdPaneProp
         <div className="threshold-view__badges">
           <span className={`badge ${liveWhep ? "badge--ok" : "badge--sim"}`}>
             <span className="badge__dot" aria-hidden="true" />
-            {liveWhep ? "LIVE WHEP" : "SIMULATED WHEP"}
+            {liveWhep ? "LIVE WHEP" : "SIMULATED EVENT · PROCEDURAL WHEP"}
           </span>
           <span className="badge badge--mono">{scenario.deviceId}</span>
         </div>
