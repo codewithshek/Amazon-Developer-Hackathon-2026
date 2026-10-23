@@ -1,0 +1,56 @@
+{
+  "name": "hearthguard",
+  "version": "1.0.0",
+  "private": false,
+  "license": "MIT",
+  "description": "HearthGuard — a cross-device care concierge for Ring, Alexa+ MCP, Fire TV and AWS Bedrock.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "concurrently -k -n server,ui -c yellow,cyan \"npm:dev:server\" \"npm:dev:client\"",
+    "dev:server": "tsx watch src/server/index.ts",
+    "dev:client": "vite --port 5173 --strictPort",
+    "dev:server:e2e": "tsx src/server/index.ts",
+    "dev:client:e2e": "vite --port 5273 --strictPort",
+    "build": "tsc --noEmit && vite build",
+    "start": "tsx src/server/index.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:bridge": "vitest run packages/ring-alexa-mcp-bridge/test/bridge.test.ts",
+    "test:agent": "vitest run tests/agent.test.ts",
+    "test:mcp": "vitest run tests/mcp.test.ts",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "@aws-sdk/client-bedrock-runtime": "^3.1156.0",
+    "@fontsource-variable/instrument-sans": "^5.3.0",
+    "@fontsource-variable/newsreader": "^5.3.0",
+    "@fontsource/ibm-plex-mono": "^5.3.0",
+    "@modelcontextprotocol/sdk": "^1.32.1",
+    "cors": "^2.8.6",
+    "express": "^5.3.0",
+    "gsap": "^3.15.0",
+    "lucide-react": "^1.61.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@types/supertest": "^7.2.1",
+    "@vitejs/plugin-react": "^6.1.2",
+    "concurrently": "^10.0.6",
+    "supertest": "^7.3.1",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5",
+    "vitest": "^5.0.5"
+  }
+}
