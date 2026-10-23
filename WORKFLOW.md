@@ -237,3 +237,116 @@ resources update automatically once the id is accepted by the enum and `SCENARIO
 - Do not commit the local demo secret or AWS keys.
 - Do not add a database “for realism” without also documenting the privacy and retention
   implications.
+
+---
+
+## Appendix: Autonomous Anti-Gravity Zero-Touch Reference & Blueprints
+
+# WORKFLOW.md — End-to-End Zero-Human-Touch Anti-Gravity Execution Workflow
+
+**Target Hackathon:** [Build, Ship, Shape: Amazon Developer Hackathon 2026](https://amazonappdev2026.devpost.com/)  
+**Official Rules & Rubric:** [Official Rules](https://amazonappdev2026.devpost.com/rules) | [Developer Resources](https://amazonappdev2026.devpost.com/resources) | [Official FAQs](https://amazonappdev2026.devpost.com/details/faqs)  
+**Project:** **HearthGuard (KinSight)** — Cross-Device Autonomous Caretaking, Accessibility & Threshold Concierge (Alexa+ MCP `2025-11-25` Streamable HTTP + Ring Partner API WHEP/HMAC + Fire TV 10-Foot Multi-Modal PiP HUD + AWS Bedrock Nova Pro & Strands SDK + Bee Wearable Context Bridge)
+
+## 1. How This Zero-Human Workflow Operates in Anti-Gravity
+
+To build **HearthGuard** from an empty directory to a 100% tested, submission-ready repository **without human intervention or runtime errors**, follow this exact 3-step launch sequence:
+
+### Step 1: Drop the 11 Specification Files into Your Project Root
+Unzip `HearthGuard_Antigravity_ZeroTouch_Kit.zip` (or copy the generated `.md` files) into your empty project folder `hearthguard-amazon-hackathon-2026/`:
+- `WORKFLOW.md` (This master autonomous orchestration workflow)
+- `skills.md` (Maps all 175+ installed Anti-Gravity skills + Orchestra-Research AI-research-SKILLs + CLI install commands for missing skills)
+- `PRD.md` (Amazon Principal PM 6-Pager + Functional Requirements `FR-01` to `FR-12`)
+- `ARCHITECTURE.md` (System Topology, Sequence Flows, MCP `2025-11-25` Streamable HTTP & Ring WHEP Specs, ADRs)
+- `DESIGN.md` (10-Foot Fire TV Spatial UI Tokens, D-Pad `LRUD` State Machine, Audio Ducking, WCAG AAA Contrast, GSAP Motion)
+- `TECH_STACK.md` (Exact Dependencies, Monorepo Layout, Vega OS Manifest, and Mandatory Runtime Code Hooks)
+- `PLAN.md` (10 Atomic Execution Phases with Self-Healing Verification Gates)
+- `TEST.md` (Complete Runnable Unit, MCP Protocol, Bedrock Agent, and Playwright E2E Test Code)
+- `RESULTS.md` (Benchmark Verification Matrix, ARA Seal Level 2 Scorecard, and Traceability Table)
+- `SECURITY.md` (STRIDE Threat Model, Timing-Safe HMAC-SHA256 Code, Zero-Disk Ephemeral Video Frame Buffer, IAM Least Privilege)
+- `SUBMISSION_AND_FRICTION_LOG.md` (Devpost Copy, Product Feedback, 5 Friction Log Entries for the **+10% Judging Score Bonus**, and 3-Minute Demo Video Script)
+
+### Step 2: Paste the Zero-Touch Autonomous Master Prompt into Anti-Gravity
+Copy the exact prompt block below into your Anti-Gravity agent chat in **Auto-Execute / Agent Mode (`bmad-build-auto` / `pilot` / `handsfree`)**:
+
+```text
+@WORKFLOW.md @skills.md @PRD.md @ARCHITECTURE.md @DESIGN.md @TECH_STACK.md @PLAN.md @TEST.md @RESULTS.md @SECURITY.md @SUBMISSION_AND_FRICTION_LOG.md
+
+ACTIVATE AUTONOMOUS ZERO-HUMAN EXECUTION MODE (using `handsfree`, `pilot`, `bmad-build-auto`, `autoresearch`, and `verification-before-completion`).
+
+Your mission is to build, test, harden, and verify the entire **HearthGuard (KinSight)** monorepo end-to-end without pausing for human input, leaving zero TODOs or placeholders, and passing every unit, protocol, and E2E verification gate.
+
+Execute the following 8 Autonomous Loops sequentially:
+
+LOOP 1 (Pre-Flight Skill & MCP Setup):
+- Read `skills.md` Part A. Run the non-interactive skill and MCP installation commands (`npx skills add https://github.com/Orchestra-Research/AI-Research-SKILLs -g -y`, write `mcp.config.json` with `@amazon-devices/vega-devtools-mcp` and `https://knowledge.appstore-mcp.ring.amazon.dev/mcp`, and write `vega-manifest.toml`).
+
+LOOP 2 (Monorepo & Open-Source Mini-Challenge Package — `packages/ring-alexa-mcp-bridge`):
+- Activate skills: `setup-ts-deep-modules`, `api-and-interface-design`, `auth-implementation-patterns`, `harden`, `gravitas-typescript`.
+- Create root `LICENSE` (MIT), `package.json`, `tsconfig.json`, and `packages/ring-alexa-mcp-bridge/` (with its own `package.json` and `LICENSE` for the $5,000 Open Source Mini-Challenge).
+- Implement timing-safe Ring Webhook HMAC-SHA256 verification (`verifyRingWebhookHmac`), RFC 8829 WebRTC WHEP SDP session negotiation (`negotiateRingWhepSession` targeting `https://api.amazonvision.com/v1/devices/{deviceId}/media/streaming/whep/sessions`), and `buildAlexaMcpCardPayload`.
+- Run Gate 1: `npm run test:bridge` (must pass 100%).
+
+LOOP 3 (AWS Builder Core & Bee Wearable Context Bridge — `src/server/bedrockStrandsAgent.ts` & `src/server/beeContextClient.ts`):
+- Activate skills: `autoresearch`, `compiler`, `dspy`, `instructor`, `outlines`, `async-python-patterns`, `nodejs-backend-patterns`.
+- Implement runtime integration of `@aws-sdk/client-bedrock-runtime` (`BedrockRuntimeClient`, `InvokeModelCommand` calling `amazon.nova-pro-v1:0`) structured as an AWS Strands multi-step agent loop, paired with `BeeProxyClient` querying `http://127.0.0.1:8787/v1/facts` (`bee proxy` CLI).
+- Build deterministic replay fallback fixtures (`src/server/scenarios.ts`) for all 3 scenarios (`SCN-01` 2:15 AM Sundowning Exit Prevention, `SCN-02` Deaf/HoH Courier Visual & Voice Relay, `SCN-03` Cold-Chain Insulin Delivery Custody) so the app works with zero cloud credentials during judging.
+- Run Gate 2: `npm run test:agent` (must pass 100%).
+
+LOOP 4 (Self-Hosted Alexa+ MCP `2025-11-25` Streamable HTTP Server — `src/server/mcpStreamableServer.ts`):
+- Activate skills: `backend`, `nodejs-backend-patterns`, `state-machine`, `microservices-patterns`, `api-design-principles`.
+- Implement `/mcp` supporting `POST /mcp`, `GET /mcp` (SSE), and `DELETE /mcp` compliant with MCP Specification `2025-11-25` Streamable HTTP (`Mcp-Session-Id` header issuance, `Access-Control-Expose-Headers: Mcp-Session-Id`, `Origin` validation, 5 MCP Tools, and `care://timeline` MCP Resources).
+- Expose `POST /api/ring/webhook` and `GET /api/events` (real-time SSE broadcast to Fire TV and Alexa+ surfaces).
+- Run Gate 3: `npm run test:mcp` (must pass 100%).
+
+LOOP 5 (10-Foot Fire TV Spatial UI & 3-Pane Judge Command Center — `src/client/`):
+- Activate skills: `21st-ui-build`, `build-awwwards-quality-sites`, `awwwards-dna-harvester`, `apple-design`, `better-ui`, `better-accessibility`, `accessibility-compliance`, `gsap-react`, `gsap-timeline`, `react-state-management`, `vercel-react-best-practices`.
+- Build `FireTvTenFootHud.tsx` (W3C HTML5 Media Player with automatic audio ducking 100% -> 20%, Picture-in-Picture live camera canvas, WCAG AAA 11.4:1 contrast badges, Deaf/HoH visual intent banners, 60fps GSAP transitions, and full `LRUD` D-Pad arrow/Enter/Escape spatial focus navigation).
+- Build `RingSimulatorPane.tsx` (interactive WebRTC/Canvas camera feed + 1-click HMAC-signed webhook triggers for all 3 scenarios).
+- Build `AlexaMcpConsolePane.tsx` (Simulated Alexa+ multimodal voice/card console + live JSON-RPC 2.0 wire inspector).
+- Build `App.tsx` supporting both the 3-Pane Split-Screen Judge Command Studio and standalone fullscreen Fire TV mode (`?mode=firetv`).
+
+LOOP 6 (Automated Self-Healing QA & Playwright E2E Verification):
+- Activate skills: `tdd`, `systematic-debugging`, `playwright-core`, `playwright-qa`, `browser-testing-with-devtools`, `break`, `break-ui`, `roadtest`, `verification-before-completion`.
+- Execute `npm test` and `npx playwright test`. If any test or TypeScript check fails, diagnose the root cause automatically, patch the file, and re-run until 0 errors and 0 warnings remain.
+
+LOOP 7 (ARA Rigor Audit & Benchmark Generation):
+- Activate skills: `rigor-reviewer`, `bmad-eval`, `proof`, `referee`.
+- Populate `RESULTS.md` with actual measured test execution latencies and pass rates.
+
+LOOP 8 (Anti-Slop Documentation Polish):
+- Activate skills: `humanizer`, `stop-slop`, `unslop`, `avoid-ai-writing`, `better-writing`, `polish`, `impeccable`.
+- Finalize `README.md` and `docs/SUBMISSION_AND_FRICTION_LOG.md` so judges can boot the project in 1 command (`npm install && npm run dev`).
+```
+
+## 2. End-to-End Autonomous State Machine Diagram
+
+```
+[Phase 0: Pre-Flight CLI]
+  |-- Install Orchestra-Research AI-research-SKILLs + Configure ADBT & Ring MCP
+  v
+[Phase 1: Spec Lock]
+  |-- Load PRD.md, ARCHITECTURE.md, DESIGN.md, TECH_STACK.md, SECURITY.md
+  v
+[Phase 2: Package 1 — @hearthguard/ring-alexa-mcp-bridge (MIT OSS)]
+  |-- Build HMAC-SHA256 Verifier + WHEP SDP Client + MCP Card Builder
+  |-- Gate 1: vitest bridge.test.ts --> [FAIL? -> systematic-debugging -> retry]
+  v                                 --> [PASS!]
+[Phase 3: AWS Bedrock Nova + Strands Agent + Bee Proxy Client]
+  |-- Wire @aws-sdk/client-bedrock-runtime + Deterministic 3-Scenario Replay
+  |-- Gate 2: vitest bedrock-agent.test.ts --> [PASS!]
+  v
+[Phase 4: Alexa+ MCP 2025-11-25 Streamable HTTP Server (/mcp)]
+  |-- Wire POST/GET/DELETE /mcp + Mcp-Session-Id + 5 Tools + SSE Bus
+  |-- Gate 3: vitest mcp-protocol.test.ts --> [PASS!]
+  v
+[Phase 5: Fire TV 10-Foot Spatial HUD + 3-Pane Judge Studio]
+  |-- Build W3C Player + Auto Audio Duck + LRUD D-Pad Focus + GSAP PiP Overlay
+  |-- Gate 4: vite build + tsc --noEmit --> [PASS!]
+  v
+[Phase 6: Playwright E2E & Accessibility Audit]
+  |-- Simulate SCN-01, SCN-02, SCN-03 + D-Pad ArrowRight/Enter + Zero Console Errors
+  |-- Gate 5: npx playwright test --> [PASS!]
+  v
+[Phase 7: Final Packaging & Devpost Submission Ready]
+```
