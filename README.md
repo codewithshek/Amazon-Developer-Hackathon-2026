@@ -331,7 +331,6 @@ It is not published to npm and is **not an official Amazon or Ring SDK**. See
 - [SECURITY.md](SECURITY.md) — threat model, controls, and known gaps
 - [SUBMISSION_AND_FRICTION_LOG.md](SUBMISSION_AND_FRICTION_LOG.md) — submission copy and observed friction
 - [PLAN.md](PLAN.md) — build plan, decisions, and remaining work
-- [skills.md](skills.md) — how the design/research skills informed the build
 
 ---
 

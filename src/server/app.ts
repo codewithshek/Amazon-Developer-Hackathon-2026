@@ -31,10 +31,19 @@ type RawRequest = Request & { rawBody?: string };
 const LOCAL_ORIGIN = /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/;
 const EXTRA_ORIGIN = process.env.MCP_ALLOWED_ORIGIN;
 
-function originAllowed(origin: string | undefined): boolean {
+function originAllowed(origin: string | undefined, host?: string): boolean {
   if (!origin) return true;
   if (LOCAL_ORIGIN.test(origin)) return true;
-  return Boolean(EXTRA_ORIGIN && origin === EXTRA_ORIGIN);
+  if (EXTRA_ORIGIN === "*" || (EXTRA_ORIGIN && origin === EXTRA_ORIGIN)) return true;
+  if (host) {
+    try {
+      const parsed = new URL(origin);
+      if (parsed.host === host) return true;
+    } catch {
+      // ignore malformed URL
+    }
+  }
+  return false;
 }
 
 export function createApp() {
@@ -63,7 +72,7 @@ export function createApp() {
   // arbitrary web origins, and expose the session header to browser JS.
   app.use("/mcp", (req: Request, res: Response, next: NextFunction) => {
     const origin = req.headers.origin;
-    if (!originAllowed(origin)) {
+    if (!originAllowed(origin, req.headers.host)) {
       res.status(403).json({
         jsonrpc: "2.0",
         error: { code: -32000, message: "Origin is not allowed to access this MCP server" },
